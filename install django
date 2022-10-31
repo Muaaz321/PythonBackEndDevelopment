@@ -1,0 +1,7 @@
+pip install django
+pip install virtualenvwrapper-win
+
+mkvirtualenv myapp
+pip install django
+
+django-admin startproject myproject
