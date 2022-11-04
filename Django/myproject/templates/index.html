@@ -4,6 +4,21 @@
 
 <h1>Django Tutorial</h1>
 
+{% for feature in features%}
+
+<table border="2">
+    <tr>
+      <td><b>Feature from Loop </b></td>
+      <td>{{feature.name}}</td>
+      <td>{{feature.id}}</td>
+      <td>{{feature.details}}</td>
+      {% if feature.is_true == True %}
+      <td>This is True</td>
+      
+    </tr>
+  </table>
+  {% endif %}
+  {% endfor %}
 <h3>
     <!-- How are you doing today {{name}} -->
    
@@ -19,3 +34,4 @@
     <input type="submit">
 
 </form>
+
