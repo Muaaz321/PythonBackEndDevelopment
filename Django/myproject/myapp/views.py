@@ -51,9 +51,11 @@ def index(request):
 
 def counter(request):
    # word = request.GET['word'] URL appears without using POST , <form method="" 
-   word = request.POST['word']
-   amount_of_word = len(word.split())
-   return render(request,'counter.html',{'amount':amount_of_word})
+   # word = request.POST['word']
+   # amount_of_word = len(word.split())
+   posts = [1,2,3,4,5,'time','tom','John']
+
+   return render(request,'counter.html',{'posts':posts})
 
 def register(request):
    if request.method == 'POST':
@@ -72,10 +74,37 @@ def register(request):
             return redirect('register')
          else:
             user = User.objects.create_user(username=username,email=email,password=password)
-            user.save();
+            user.save()
             return redirect('login')
       else:
          messages.info(request,'Password not the same')
          return redirect('register')
    else:
       return render(request,'register.html')
+
+
+
+def Login(request):
+   if request.method =='POST':
+      username = request.POST['username']
+      password = request.POST['password']
+
+      user = auth.authenticate(username = username,password = password)
+
+      if user is not None:
+         auth.login(request,user)
+         return redirect('/')
+      else:
+         messages.info(request,'Credentials are invalid')
+         return redirect('login')
+   else:
+      return render (request,'login.html')
+
+   
+def Logout(request):
+      auth.logout(request)
+      return redirect('/')
+
+def post(request,pk):
+   return render(request,'post.html',{'pk':pk})
+
